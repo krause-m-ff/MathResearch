@@ -42,11 +42,11 @@ FEED_MAX_BYTES = 1 * 1024 * 1024 # フィード最大サイズ (1MB)
 
 # Gemini API
 GEMINI_MODELS = [  # フォールバック順（クォータ超過時に次を試行）
-    "gemini-2.0-flash-lite",
+    "gemini-2.5-flash-lite",    # 最も安定（クォータ残量が多い）
     "gemini-2.0-flash",
-    "gemini-2.5-flash-lite",
+    "gemini-2.0-flash-lite",
 ]
-GEMINI_BATCH_SIZE = 50           # 1リクエストあたりの記事数（大バッチ = APIコール最小化）
+GEMINI_BATCH_SIZE = 8            # 1リクエストあたりの記事数（大きすぎるとトークン制限に抵触）
 
 
 # ═══════════════════════════════════════════════════
