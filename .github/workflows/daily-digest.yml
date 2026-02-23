@@ -13,6 +13,28 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
+      - name: Diagnose Gemini API
+        run: |
+          python - <<'EOF'
+          import requests, os, sys
+          api_key = os.environ.get("GEMINI_API_KEY", "")
+          print(f"GEMINI_API_KEY set: {bool(api_key)} (length={len(api_key)})")
+          if not api_key:
+              print("ERROR: GEMINI_API_KEY is empty!")
+              sys.exit(1)
+          for model in ["gemini-2.0-flash-lite", "gemini-2.0-flash", "gemini-2.5-flash-lite"]:
+              url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+              try:
+                  resp = requests.post(url, json={"contents": [{"parts": [{"text": "Say hi"}]}], "generationConfig": {"maxOutputTokens": 10}}, timeout=15)
+                  r = resp.json()
+                  ok = "candidates" in r
+                  err = r.get("error", {}).get("message", "")[:100]
+                  print(f"{model}: HTTP={resp.status_code} ok={ok} err={err}")
+              except Exception as e:
+                  print(f"{model}: EXCEPTION {e}")
+          EOF
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - run: python daily_math_digest.py
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
