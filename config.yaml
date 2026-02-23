@@ -1,0 +1,145 @@
+discord:
+  webhook_url: "${DISCORD_WEBHOOK_URL}"  # 環境変数から注入
+
+schedule:
+  timezone: "Asia/Tokyo"
+  max_articles_per_feed: 5
+  max_age_hours: 24
+  summarize: true  # AI要約 (Gemini API, GEMINI_API_KEY必要。未設定時はスキップ)
+
+filters:
+  include_categories: []   # 空=全分野表示。例: ["math.AG", "math.CT", "math.NT"]
+  exclude_categories: []   # 除外する分野。例: ["math.CO"]
+
+feeds:
+  # === 研究論文（プレプリント） ===
+  - name: "arXiv — 数学 (全般)"
+    url: "https://rss.arxiv.org/atom/math"
+    lang: "en"
+    category: "論文"
+    emoji: "📄"
+    max_articles: 3  # 全般は量が多いので制限
+
+  - name: "arXiv — 代数幾何 (math.AG)"
+    url: "https://rss.arxiv.org/atom/math.AG"
+    lang: "en"
+    category: "論文"
+    emoji: "📄"
+
+  - name: "arXiv — 数論 (math.NT)"
+    url: "https://rss.arxiv.org/atom/math.NT"
+    lang: "en"
+    category: "論文"
+    emoji: "📄"
+
+  - name: "arXiv — 解析学 (math.CA)"
+    url: "https://rss.arxiv.org/atom/math.CA"
+    lang: "en"
+    category: "論文"
+    emoji: "📄"
+
+  - name: "arXiv — 圏論 (math.CT)"
+    url: "https://rss.arxiv.org/atom/math.CT"
+    lang: "en"
+    category: "論文"
+    emoji: "📄"
+
+  - name: "arXiv — 機械学習 (cs.LG)"
+    url: "https://rss.arxiv.org/atom/cs.LG"
+    lang: "en"
+    category: "論文"
+    emoji: "🤖"
+    max_articles: 3
+
+  # === 数学ニュース・メディア ===
+  - name: "Quanta Magazine"
+    url: "https://api.quantamagazine.org/feed/"
+    lang: "en"
+    category: "ニュース"
+    emoji: "📰"
+
+  - name: "ScienceDaily — Mathematics"
+    url: "https://www.sciencedaily.com/rss/computers_math/mathematics.xml"
+    lang: "en"
+    category: "ニュース"
+    emoji: "📰"
+
+  - name: "AMS News"
+    url: "https://www.ams.org/rss/conm.rss"
+    lang: "en"
+    category: "ニュース"
+    emoji: "🏛️"
+
+  - name: "AMS Math in the Media"
+    url: "https://www.ams.org/rss/mathmedia.rss"
+    lang: "en"
+    category: "ニュース"
+    emoji: "🏛️"
+
+  # === 数学ブログ ===
+  - name: "Terence Tao — What's new"
+    url: "https://terrytao.wordpress.com/feed/"
+    lang: "en"
+    category: "ブログ"
+    emoji: "✏️"
+
+  - name: "n-Category Café"
+    url: "https://golem.ph.utexas.edu/category/atom10.xml"
+    lang: "en"
+    category: "ブログ"
+    emoji: "✏️"
+
+  - name: "Math3ma"
+    url: "https://www.math3ma.com/blog/rss.xml"
+    lang: "en"
+    category: "ブログ"
+    emoji: "✏️"
+
+  - name: "Math ∩ Programming"
+    url: "https://jeremykun.com/feed/"
+    lang: "en"
+    category: "ブログ"
+    emoji: "✏️"
+
+  - name: "Gödel's Lost Letter"
+    url: "https://rjlipton.com/feed/"
+    lang: "en"
+    category: "ブログ"
+    emoji: "✏️"
+
+  - name: "Joel David Hamkins"
+    url: "https://jdh.hamkins.org/feed/"
+    lang: "en"
+    category: "ブログ"
+    emoji: "✏️"
+
+  # === 数学系YouTube ===
+  - name: "3Blue1Brown"
+    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw"
+    lang: "en"
+    category: "YouTube"
+    emoji: "🎬"
+
+  - name: "Numberphile"
+    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCoxcjq-8xIDTYp3uz647V5A"
+    lang: "en"
+    category: "YouTube"
+    emoji: "🎬"
+
+  - name: "Mathologer"
+    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UC1_uAIS3r8Vu6JjXWvastJg"
+    lang: "en"
+    category: "YouTube"
+    emoji: "🎬"
+
+  - name: "Stand-up Maths"
+    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCSju5G2aFaWMqn-_0YBtq5A"
+    lang: "en"
+    category: "YouTube"
+    emoji: "🎬"
+
+  - name: "Veritasium"
+    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA"
+    lang: "en"
+    category: "YouTube"
+    emoji: "🎬"
